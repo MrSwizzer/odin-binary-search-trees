@@ -1,5 +1,15 @@
 import Tree from './tree.js';
 
-const tree = new Tree([5, 4, 3, 2, 3, 1]);
+function testInsertion() {
+	const tree = new Tree([5, 4, 3, 2, 3, 1]);
 
-console.log(tree.root.data);
+	//Test normal insertion
+	tree.insert(8);
+	console.log(tree.prettyPrint(tree.rootNode));
+
+	//Test existing value
+	tree.insert(2);
+	console.log(tree.prettyPrint(tree.rootNode));
+}
+
+testInsertion();

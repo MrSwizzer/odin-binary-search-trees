@@ -2,7 +2,7 @@ import Node from './node.js';
 
 export default class Tree {
 	constructor(inputArray) {
-		this.root = this.buildTree(inputArray);
+		this.rootNode = this.buildTree(inputArray);
 	}
 
 	buildTree(array) {
@@ -47,5 +47,29 @@ export default class Tree {
 		if (node.left !== null) {
 			this.prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
 		}
+	}
+
+	insert(value) {
+		this.rootNode = this.insertRecursive(this.rootNode, value);
+	}
+
+	insertRecursive(node, value) {
+		// If the current node is null, create a new node with the value
+		if (node === null) {
+			return new Node(value);
+		}
+
+		// If the value is less, go left
+		if (value < node.data) {
+			node.left = this.insertRecursive(node.left, value);
+		}
+		// If the value is greater, go right
+		else if (value > node.data) {
+			node.right = this.insertRecursive(node.right, value);
+		}
+		// If the value is equal, do nothing (no duplicates allowed)
+
+		// Return the current node
+		return node;
 	}
 }
