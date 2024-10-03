@@ -17,9 +17,6 @@ export default class Tree {
 		//Create Binary Search Tree
 		const root = this.createBST(removedDuplicatesArr, 0, removedDuplicatesArr.length - 1);
 
-		//Visualize the Tree
-		this.prettyPrint(root);
-
 		return root;
 	}
 
@@ -71,5 +68,57 @@ export default class Tree {
 
 		// Return the current node
 		return node;
+	}
+
+	delete(value) {
+		this.rootNode = this.deleteRecursive(this.rootNode, value);
+	}
+
+	deleteRecursive(node, value) {
+		if (node === null) return null;
+
+		//Call next left node if value is smaller then current node
+		if (value < node.data) {
+			node.left = this.deleteRecursive(node.left, value);
+			//Call next right node if value is greater then current node
+		} else if (value > node.data) {
+			node.right = this.deleteRecursive(node.right, value);
+		} else {
+			//If the node has no children
+			if (node.left === null && node.right === null) {
+				return null;
+			}
+
+			//If only left child, replace node with left child
+			if (node.left !== null && node.right === null) {
+				return node.left;
+			}
+
+			//If only right child, replace node with right child
+			if (node.right !== null && node.left === null) {
+				return node.right;
+			}
+
+			//If two children, replace node with smallest node on the right side
+			if (node.left !== null && node.right !== null) {
+				const smallestRightSideNode = this.findSmallest(node.right);
+				const smallestRightSideValue = smallestRightSideNode.data;
+
+				//Don't replace node as is, just the data to maintain the right order
+				node.data = smallestRightSideValue;
+
+				//Delete the next smallest Node, since we use it as new parant node
+				node.right = this.deleteRecursive(node.right, smallestRightSideValue);
+			}
+		}
+		return node;
+	}
+
+	findSmallest(node) {
+		let currentNode = node;
+		while (currentNode.left !== null) {
+			currentNode = currentNode.left;
+		}
+		return currentNode;
 	}
 }
