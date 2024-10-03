@@ -101,7 +101,7 @@ export default class Tree {
 
 			//If two children, replace node with smallest node on the right side
 			if (node.left !== null && node.right !== null) {
-				const smallestRightSideNode = this.findSmallest(node.right);
+				const smallestRightSideNode = this.findSmallestNode(node.right);
 				const smallestRightSideValue = smallestRightSideNode.data;
 
 				//Don't replace node as is, just the data to maintain the right order
@@ -114,11 +114,31 @@ export default class Tree {
 		return node;
 	}
 
-	findSmallest(node) {
+	findSmallestNode(node) {
 		let currentNode = node;
 		while (currentNode.left !== null) {
 			currentNode = currentNode.left;
 		}
 		return currentNode;
+	}
+
+	find(value) {
+		return this.findRecursive(this.rootNode, value);
+	}
+
+	findRecursive(node, value) {
+		// Base case: if the current node is null, the value is not found
+		if (node === null) return null;
+
+		// Call next left node if value is smaller than current node
+		if (value < node.data) {
+			return this.findRecursive(node.left, value); // Continue searching in the left subtree
+		}
+		// Call next right node if value is greater than current node
+		else if (value > node.data) {
+			return this.findRecursive(node.right, value); // Continue searching in the right subtree
+		} else {
+			return node; // Return the node if the value is found
+		}
 	}
 }

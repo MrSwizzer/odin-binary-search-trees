@@ -44,3 +44,27 @@ function testDelete() {
 }
 
 testDelete();
+
+function testFind() {
+	console.log('\nFind tests:');
+	// Initialize the tree with an array of values
+	const tree = new Tree([5, 4, 3, 2, 3, 1, 6, 7, 8, 9, 10, 11]);
+
+	// Visualize the tree after initial creation
+	console.log('Initial tree:');
+	tree.prettyPrint(tree.rootNode);
+
+	console.log('\nFind a value that exists (3)');
+	// Attempt to find an existing value and log the result
+	const foundNode1 = tree.find(3);
+	console.log(foundNode1 ? `Found node: ${foundNode1.data}` : 'Node not found');
+
+	console.log('\nFind a value that does not exist (15)');
+	// Attempt to find a non-existing value and log the result
+	const foundNode2 = tree.find(15);
+	console.log(foundNode2 ? `Found node: ${foundNode2.data}` : 'Node not found');
+
+	console.log('________________________________________');
+}
+
+testFind();
