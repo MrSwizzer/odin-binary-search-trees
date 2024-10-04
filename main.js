@@ -1,7 +1,7 @@
 import Tree from './tree.js';
 
 function testInsertion() {
-	console.log('\nInsert tests:');
+	console.log('\nInsert tests:\n');
 	const tree = new Tree([5, 4, 3, 2, 3, 1]); // Initialize tree with values
 
 	// Visualize the tree after initial creation
@@ -19,10 +19,11 @@ function testInsertion() {
 	tree.prettyPrint(tree.rootNode);
 	console.log('________________________________________');
 }
+
 testInsertion();
 
 function testDelete() {
-	console.log('\nDelete tests:');
+	console.log('\nDelete tests:\n');
 	const tree = new Tree([5, 4, 3, 2, 3, 1, 6, 7, 8, 9, 10, 11]); // Initialize tree with values
 
 	// Visualize the tree after initial creation
@@ -46,7 +47,7 @@ function testDelete() {
 testDelete();
 
 function testFind() {
-	console.log('\nFind tests:');
+	console.log('\nFind tests:\n');
 	// Initialize the tree with an array of values
 	const tree = new Tree([5, 4, 3, 2, 3, 1, 6, 7, 8, 9, 10, 11]);
 
@@ -68,3 +69,28 @@ function testFind() {
 }
 
 testFind();
+
+function testLevelOrder() {
+	console.log('\nLevel Order tests:\n');
+	const tree = new Tree([5, 4, 3, 2, 1, 6, 7, 8]); // Initialize tree with values
+
+	// Visualize the tree after initial creation
+	console.log('Initial tree:');
+	tree.prettyPrint(tree.rootNode);
+
+	// Test with a callback that logs the node data
+	console.log('\nTraverse tree in level order (log each node):');
+	tree.levelOrder((node) => console.log(`Visited node: ${node.data}`));
+
+	// Test for missing callback
+	console.log('\nTest for missing callback (should throw an error):');
+	try {
+		tree.levelOrder(); // Call without a callback
+	} catch (error) {
+		console.error(`Error caught: ${error.message}`);
+	}
+
+	console.log('________________________________________');
+}
+
+testLevelOrder();

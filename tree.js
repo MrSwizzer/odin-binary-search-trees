@@ -141,4 +141,29 @@ export default class Tree {
 			return node; // Return the node if the value is found
 		}
 	}
+
+	levelOrder(callback) {
+		if (callback === null || callback === undefined) {
+			throw new Error('No callback provided');
+		}
+
+		if (this.rootNode === null) {
+			return;
+		}
+		const queue = [];
+		queue.push(this.rootNode);
+
+		while (queue.length > 0) {
+			const currentNode = queue.shift();
+			callback(currentNode);
+
+			if (currentNode.left !== null) {
+				queue.push(currentNode.left);
+			}
+
+			if (currentNode.right !== null) {
+				queue.push(currentNode.right);
+			}
+		}
+	}
 }
