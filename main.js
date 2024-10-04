@@ -94,3 +94,48 @@ function testLevelOrder() {
 }
 
 testLevelOrder();
+
+function testInDepthTraversal() {
+	console.log('\nIn-Depth Traversal tests: \n');
+	const tree = new Tree([5, 4, 3, 2, 1, 6, 7, 8]);
+
+	// Visualize the tree after initial creation
+	console.log('Initial tree:');
+	tree.prettyPrint(tree.rootNode);
+
+	console.log('\nExpected In-Order Traversal Output: 1, 2, 3, 4, 5, 6, 7, 8');
+	console.log('In-Order Traversal:');
+	tree.inOrder((node) => console.log(node.data)); // Callback for in-order traversal
+
+	console.log('\nExpected Pre-Order Traversal Output: 4, 2, 1, 3, 6, 5, 7, 8');
+	console.log('Pre-Order Traversal:');
+	tree.preOrder((node) => console.log(node.data)); // Callback for pre-order traversal
+
+	console.log('\nExpected Post-Order Traversal Output: 1, 3, 2, 5, 8, 7, 6, 4');
+	console.log('Post-Order Traversal:');
+	tree.postOrder((node) => console.log(node.data)); // Callback for post-order traversal
+
+	// Testing error handling for missing callback
+	console.log('\nTesting error handling for missing callback:');
+	try {
+		tree.inOrder(); // No callback provided
+	} catch (error) {
+		console.error(error.message); // Should print "No callback provided"
+	}
+
+	try {
+		tree.preOrder(); // No callback provided
+	} catch (error) {
+		console.error(error.message); // Should print "No callback provided"
+	}
+
+	try {
+		tree.postOrder(); // No callback provided
+	} catch (error) {
+		console.error(error.message); // Should print "No callback provided"
+	}
+
+	console.log('________________________________________');
+}
+
+testInDepthTraversal();

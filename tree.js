@@ -166,4 +166,71 @@ export default class Tree {
 			}
 		}
 	}
+
+	//left -> root -> right
+	inOrder(callback) {
+		if (callback === null || callback === undefined) {
+			throw new Error('No callback provided');
+		}
+
+		if (this.rootNode === null) {
+			return;
+		}
+
+		this.inOrderRecursive(this.rootNode, callback);
+	}
+
+	inOrderRecursive(node, callback) {
+		if (node === null) {
+			return;
+		}
+		this.inOrderRecursive(node.left, callback);
+		callback(node);
+		this.inOrderRecursive(node.right, callback);
+	}
+
+	//root -> left -> right
+	preOrder(callback) {
+		if (callback === null || callback === undefined) {
+			throw new Error('No callback provided');
+		}
+
+		if (this.rootNode === null) {
+			return;
+		}
+
+		this.preOrderRecursive(this.rootNode, callback);
+	}
+
+	preOrderRecursive(node, callback) {
+		if (node === null) {
+			return;
+		}
+		callback(node);
+		this.preOrderRecursive(node.left, callback);
+		this.preOrderRecursive(node.right, callback);
+	}
+
+	//left -> right -> root
+	postOrder(callback) {
+		if (callback === null || callback === undefined) {
+			throw new Error('No callback provided');
+		}
+
+		if (this.rootNode === null) {
+			return;
+		}
+
+		this.postOrderRecursive(this.rootNode, callback);
+	}
+
+	postOrderRecursive(node, callback) {
+		if (node === null) {
+			return;
+		}
+
+		this.postOrderRecursive(node.left, callback);
+		this.postOrderRecursive(node.right, callback);
+		callback(node);
+	}
 }
