@@ -293,4 +293,10 @@ export default class Tree {
 
 		return this.checkBalanceRecursiv(node.left) && this.checkBalanceRecursiv(node.right);
 	}
+
+	rebalance() {
+		const newInputArray = [];
+		this.inOrder((node) => newInputArray.push(node.data));
+		this.rootNode = this.buildTree(newInputArray);
+	}
 }

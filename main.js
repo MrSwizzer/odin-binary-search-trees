@@ -204,4 +204,27 @@ function testIsBalanced() {
 	console.log('________________________________________');
 }
 
-testIsBalanced();
+function testRebalance() {
+	console.log('\nRebalance tests: \n');
+
+	// Create a tree with unbalanced values
+	let tree = new Tree();
+	[5, 4, 3, 2, 1].forEach((value) => tree.insert(value));
+	console.log('Is Balanced (Expected: false):', tree.isBalanced());
+
+	console.log('Initial tree (unbalanced):');
+	tree.prettyPrint(tree.rootNode); // Visualize the unbalanced tree
+
+	tree.rebalance();
+
+	console.log('\nRebalanced tree:');
+	tree.prettyPrint(tree.rootNode); // Visualize the balanced tree
+
+	// Test if the tree is balanced after the rebalance method
+	const isBalancedAfterRebalance = tree.isBalanced();
+	console.log('Is the tree balanced after rebalancing? ', isBalancedAfterRebalance);
+
+	console.log('________________________________________');
+}
+
+testRebalance();
