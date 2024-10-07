@@ -6,6 +6,10 @@ export default class Tree {
 	}
 
 	buildTree(array) {
+		if (!array || array.length === 0) {
+			return null;
+		}
+
 		//Sort array
 		const sortedArr = array.sort((a, b) => a - b);
 
@@ -242,7 +246,7 @@ export default class Tree {
 		const leftHeight = this.height(node.left);
 		const rightHeight = this.height(node.right);
 
-		return leftHeight < rightHeight ? rightHeight + 1 : leftHeight + 1;
+		return Math.max(leftHeight, rightHeight) + 1;
 	}
 
 	depth(node) {
@@ -268,5 +272,25 @@ export default class Tree {
 		}
 
 		return null;
+	}
+
+	isBalanced() {
+		return this.checkBalanceRecursiv(this.rootNode);
+	}
+
+	//there is a more efficient way but this one is more readable and since its just a test project its not that important
+	checkBalanceRecursiv(node) {
+		if (node === null) {
+			return true;
+		}
+
+		const leftHeight = this.height(node.left);
+		const rightHeight = this.height(node.right);
+
+		if (Math.abs(leftHeight - rightHeight) > 1) {
+			return false;
+		}
+
+		return this.checkBalanceRecursiv(node.left) && this.checkBalanceRecursiv(node.right);
 	}
 }

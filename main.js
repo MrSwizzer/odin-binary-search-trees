@@ -173,3 +173,35 @@ function testDepth() {
 }
 
 testDepth();
+
+function testIsBalanced() {
+	console.log('\n Balanced tests: \n');
+
+	// Test 1: Balanced Tree
+	let balancedTree = new Tree();
+	[4, 2, 6, 1, 3, 5, 7].forEach((value) => balancedTree.insert(value));
+	console.log('Is Balanced (Expected: true):', balancedTree.isBalanced());
+
+	// Test 2: Unbalanced Tree (left-heavy)
+	let unbalancedLeftTree = new Tree();
+	[5, 4, 3, 2, 1].forEach((value) => unbalancedLeftTree.insert(value));
+	console.log('Is Balanced (Expected: false):', unbalancedLeftTree.isBalanced());
+
+	// Test 3: Unbalanced Tree (right-heavy)
+	let unbalancedRightTree = new Tree();
+	[1, 2, 3, 4, 5].forEach((value) => unbalancedRightTree.insert(value));
+	console.log('Is Balanced (Expected: false):', unbalancedRightTree.isBalanced());
+
+	// Test 4: Single Node Tree
+	let singleNodeTree = new Tree();
+	singleNodeTree.insert(10);
+	console.log('Is Balanced (Expected: true):', singleNodeTree.isBalanced());
+
+	// Test 5: Empty Tree
+	let emptyTree = new Tree();
+	console.log('Is Balanced (Expected: true):', emptyTree.isBalanced());
+
+	console.log('________________________________________');
+}
+
+testIsBalanced();
