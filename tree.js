@@ -233,4 +233,40 @@ export default class Tree {
 		this.postOrderRecursive(node.right, callback);
 		callback(node);
 	}
+
+	height(node) {
+		if (node === null) {
+			return -1;
+		}
+
+		const leftHeight = this.height(node.left);
+		const rightHeight = this.height(node.right);
+
+		return leftHeight < rightHeight ? rightHeight + 1 : leftHeight + 1;
+	}
+
+	depth(node) {
+		if (node === null) {
+			return null;
+		}
+
+		let currentNode = this.rootNode;
+		let depthCounter = 0;
+
+		while (currentNode !== null) {
+			if (node.data === currentNode.data) {
+				return depthCounter;
+			}
+
+			if (node.data < currentNode.data) {
+				currentNode = currentNode.left;
+			} else {
+				currentNode = currentNode.right;
+			}
+
+			depthCounter++;
+		}
+
+		return null;
+	}
 }

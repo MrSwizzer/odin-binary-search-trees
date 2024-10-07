@@ -139,3 +139,37 @@ function testInDepthTraversal() {
 }
 
 testInDepthTraversal();
+
+function testHeight() {
+	console.log('\nHeight tests: \n');
+	const tree = new Tree([5, 4, 3, 2, 1, 6, 7, 8]);
+
+	// Visualize the tree after initial creation
+	console.log('Initial tree:');
+	tree.prettyPrint(tree.rootNode);
+
+	console.log('Expected Height of node (5): 0 , Actual height:', tree.height(tree.find(5)));
+	console.log('Expected Height of node (6): 2 , Actual height:', tree.height(tree.find(6)));
+	console.log('Expected Height of node (4): 3 , Actual height:', tree.height(tree.find(4)));
+	console.log('Expected Height of non-existent node: -1 , Actual height::', tree.height(tree.find(10))); // Should return -1
+	console.log('________________________________________');
+}
+
+testHeight();
+
+function testDepth() {
+	console.log('\nDepth tests: \n');
+	const tree = new Tree([5, 4, 3, 2, 1, 6, 7, 8]);
+
+	// Visualize the tree after initial creation
+	console.log('Initial tree:');
+	tree.prettyPrint(tree.rootNode);
+
+	console.log('Expected Depth of root (8): 3 , Actual height:', tree.depth(tree.find(8)));
+	console.log('Expected Depth of node (6): 1 , Actual height:', tree.depth(tree.find(6)));
+	console.log('Expected Depth of node (4): 0 , Actual height:', tree.depth(tree.find(4)));
+	console.log('Expected Depth of non-existent node: null, Actual height::', tree.depth(tree.find(10)));
+	console.log('________________________________________');
+}
+
+testDepth();
